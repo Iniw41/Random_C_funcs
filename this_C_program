@@ -1,0 +1,110 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdbool.h>
+#define max_size 10
+
+void RemoveArrElement(int arr[], int* size, int index) {
+    for (int i=index; i< *size -1; i++){
+        arr[i] = arr[i + 1];
+    }
+    (*size)--;
+}
+
+void AddArrElement(int arr[], int* size, int element, int index) {
+    for (int i= *size; i > index; i--){
+        arr[i] = arr[i - 1];
+    }
+    arr[index] = element;
+    (*size)++;
+}
+
+void bubble_sort(int arr[], int* size, bool Asc) {
+    int i, j, temp;
+    
+    if (Asc) {
+     for (i = 0; i < *size - 1; i++) {
+         for (j = 0; j < *size - i - 1; j++) {
+             if (arr[j] > arr[j + 1]){
+                    temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+             }
+        }   
+    } else {
+        for (i = 0; i < *size - 1; i++) {
+            for (j = 0; j < *size - i - 1; j++) {
+                if (arr[j] < arr[j + 1]) {
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+                }
+            } 
+        }
+    }
+}
+
+
+void printbox(int height, int width){
+    
+    for (int i = 0; i < height; i++){
+        for (int j = 0; j < width; j++){
+            printf(" ");
+            printf("*");
+        }
+        printf("\n");
+    }
+}
+
+void printria(int height){
+    for (int i = 0; i < height; i++){
+        
+        for (int h = height; h > i;h--)
+        {
+            printf(" ");
+        }
+        for (int j = 0; j < i; j++) {
+        printf("& ");    
+        }
+        
+        printf("\n");
+    }
+}
+
+void printArr(int arr[], int size) {
+
+for (int i = 0; i < size; i++){
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int arr[max_size] = {90 ,3 ,25 ,10 ,12};
+    int size = 5;
+    printArr(arr, size);
+    
+    
+    int index = 3;
+    RemoveArrElement(arr, &size, index);
+    printArr(arr, size);
+    
+    AddArrElement(arr, &size, 2, 1);
+    printArr(arr, size);
+    
+    printbox(5,5);
+    
+    printf("\n");
+    
+    printria(5);
+    
+    printf("\n");
+    
+    bubble_sort(arr, &size, true);
+    printArr(arr, size);
+    
+    bubble_sort(arr, &size, false);
+    printArr(arr, size);
+    
+    return 0;
+}
